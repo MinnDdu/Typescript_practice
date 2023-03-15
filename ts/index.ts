@@ -47,10 +47,16 @@ let b2 = a2 + 1;
 type MyType = string[] | number
 let bi2 : MyType = ['what', 'the', 'heck'];
 
-// 함수도 가능 (파라미터 타입설정 / 리턴타입 설정)
+// 함수도 가능 (파라미터 타입설정 / 리턴타입 설정) - 함수 리텀타입에는 void 사용 가능
 function func(x:string, y:number) : number {
     return y * 2
 }
+// 옵션 파라미터 (안 사용해도 되는)는 '?'를 적어주면 됨
+// ** 중요 ** - '?'의 원리 -> y : number 를 y : number | undifined 으로 만들어주는 것!
+function func2(x:string, y?:number) : void {
+    console.log(x);
+}
+
 
 // array에 사용할 수 있는 tuple 타입
 type Member = [number, boolean];
@@ -96,3 +102,31 @@ let project : {
     days : 30,
     started : true,
 }
+
+function testFunc(name?:string) : string {
+    if (name){
+        return 'My name is ' + name;
+    } else {
+        return 'My name is John Doe';
+    }
+}
+
+function testFunc2(n:number|string) : number {
+    return n.toString.length;
+}
+
+function testFunc3(income:number, realEstate:boolean, charm:string) : string {
+    let score : number = income;
+    if (realEstate) {
+        score += 500;
+    }
+    if (charm === 'high'){
+        score += 100;
+    }
+    if (score > 600) {
+        return 'you can marry!'
+    } else {
+        return 'so sorry'
+    }
+}
+console.log(testFunc3(100, true, 'high'))
